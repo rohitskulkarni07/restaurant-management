@@ -2,23 +2,20 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const { user: currenUser } = useSelector((state) => state.auth);
-  if (!currenUser) {
-    return <Navigate to="/login"></Navigate>;
+  const { user: currentUser } = useSelector((state) => state.auth);
+
+  // Check if the user is not logged in, then redirect to login page
+  if (!currentUser) {
+    return <Navigate to="/login" />;
   }
+
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>
-          <strong>{currentUser.username}</strong> Profile
-        </h3>
+        <h3><strong>{currentUser.username}</strong> Profile</h3>
       </header>
-      <p>
-        <strong>Id:</strong> {currentUser.id}
-      </p>
-      <p>
-        <strong>Email:</strong> {currentUser.email}
-      </p>
+      <p><strong>Id:</strong> {currentUser.id}</p>
+      <p><strong>Email:</strong> {currentUser.email}</p>
       <strong>Authorities:</strong>
       <ul>
         {currentUser.roles &&
