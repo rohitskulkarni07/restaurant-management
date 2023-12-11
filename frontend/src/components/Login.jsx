@@ -4,6 +4,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+import userLogo from "../assets/user-login.png";
+
 import { login } from "../app/slices/auth";
 import { clearMessage } from "../app/slices/message";
 
@@ -46,15 +48,25 @@ const Login = () => {
   if (isLoggedIn) {
     return <Navigate to="./profile"></Navigate>;
   }
+  const circleStyle = {
+    width: "150px", // Adjust the size of the circle
+    height: "150px", // Adjust the size of the circle
+    borderRadius: "50%", // Makes the element a circle
+    backgroundColor: "white", // Background color of the circle
+    overflow: "hidden",
+  };
 
   return (
     <div className="col-md-12 login-form">
       <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        <div className="overflow-hidden" style={circleStyle}></div>
+        {/* <img
+          src={userLogo}
           alt="profile-img"
-          className="profile-img-card"
-        />
+          width="150"
+          height="150"
+          className="mx-auto align-center pr-3"
+        /> */}
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
