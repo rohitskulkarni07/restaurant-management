@@ -48,26 +48,9 @@ const Login = () => {
   if (isLoggedIn) {
     return <Navigate to="./profile"></Navigate>;
   }
-  const circleStyle = {
-    width: "160px", // Adjust the size of the circle
-    height: "160px", // Adjust the size of the circle
-    borderRadius: "50%", // Makes the element a circle
-    backgroundColor: "white", // Background color of the circle
-    overflow: "hidden",
-  };
-
   return (
-    <div className="col-md-12 login-form">
-      <div className="card card-container">
-        <div className="mx-auto" style={circleStyle}>
-          <img
-            src={userLogo}
-            alt="profile-img"
-            width="150"
-            height="150"
-            className="m-1"
-          />
-        </div>
+    <div className="login-form">
+      <div className="card">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

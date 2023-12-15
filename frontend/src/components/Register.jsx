@@ -4,7 +4,6 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { register } from "../app/slices/auth";
 import { clearMessage } from "../app/slices/message";
-import logo from "../assets/logo.png";
 
 const Register = () => {
   const [successful, setSuccessful] = useState(false);
@@ -20,28 +19,24 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   };
 
   const validationSchema = Yup.object().shape({
     username: Yup.string()
-      .test(
-        "len",
-        "The username must be between 3 and 20 characters.",
-        (val) =>
-          val && val.toString().length >= 3 && val.toString().length <= 20
-      )
+      .min(3, "Username must be at least 3 characters")
+      .max(20, "Username must be at most 20 characters")
       .required("This field is required!"),
     email: Yup.string()
       .email("This is not a valid email.")
       .required("This field is required!"),
     password: Yup.string()
-      .test(
-        "len",
-        "The password must be between 6 and 40 characters.",
-        (val) =>
-          val && val.toString().length >= 6 && val.toString().length <= 40
-      )
-      .required("This filed is required!"),
+      .min(6, "Password must be at least 6 characters")
+      .max(40, "Password must be at most 40 characters")
+      .required("This field is required!"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("This field is required!"),
   });
 
   const handleRegister = (formValue) => {
@@ -62,7 +57,6 @@ const Register = () => {
   return (
     <div className="col-md-12 signup-form">
       <div className="card card-container">
-        <img src={logo} alt="profile-img" className="profile-img-card" />
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -122,6 +116,25 @@ const Register = () => {
                     />
                     <ErrorMessage
                       name="password"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <Field
+                      name="confirmPassword"
+                      type="password"
+                      className={
+                        "form-control" +
+                        (errors.confirmPassword && touched.confirmPassword
+                          ? " is-invalid"
+                          : "")
+                      }
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
                       component="div"
                       className="invalid-feedback"
                     />

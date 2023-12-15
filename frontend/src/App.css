@@ -1,28 +1,263 @@
-  label {
-    display: block;
-    margin-top: 10px;
-  }
+label {
+  display: block;
+  margin-top: 10px;
+}
 
-  .login-form,
-  .signup-form {
-    max-width: 350px;
-    margin: auto;
-  }
+.login-form,
+.signup-form {
+  height: 80vh;
+  max-width: 350px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .card {
-    width: 350px; /* Adjust the width to your preference */
-    height: auto; /* Let the height adjust based on content */
-    background: #00000000;
-    padding: 20px 25px 30px;
-    margin: 50% auto; /* Center the card both horizontally and vertically */
-    border-radius: 2px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-  }
+.card {
+  height: auto;
+  background: #00000000;
+  padding: 20px 25px 30px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
 
-  .profile-img-card {
-    width: 100%;
-    height: 100%;
-    margin: 24px auto; /* Center the profile image horizontally */
-    display: block;
-    border-radius: 50%;
+.profile-img-card {
+  width: 100%;
+  height: 100%;
+  margin: 24px auto;
+  display: block;
+  border-radius: 50%;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  background-color: #0e1550;
+  padding: 0.7%;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  color: gold;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-item {
+  margin-right: 10px;
+  list-style: none;
+  font-size: 1.3em;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Conditional rendering styles */
+.navbar-nav.ml-auto {
+  display: flex;
+  align-items: center;
+}
+
+/* Profile and Logout links */
+.nav-item a.nav-link {
+  margin-right: 10px;
+}
+
+/* Container styles */
+.container {
+  margin-top: 20px;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 20px;
+  margin-right: 20px;
+  color: black;
+  font-size: large;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.invalid-feedback {
+  color: red;
+  font-size: 14px;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:disabled {
+  background-color: #b3c0c8;
+  cursor: not-allowed;
+}
+
+/* Spinner styles */
+.spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: text-bottom;
+  border: 0.2em solid currentColor;
+  border-right: 0.2em solid transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
   }
+}
+
+/* Alert styles */
+.alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px; /* Set the width as per your preference */
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+
+.table-card-container {
+  display: flex;
+  flex-direction: column;
+  height: 6em;
+  width: 14em;
+  background: #00000000;
+  padding: 0.5em;
+  margin: 0.5em;
+  box-shadow: -2px 2px 8px rgb(0 0 0);
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.table-card-container:hover,
+.table-card-container:active {
+  transform: scale(1.3); /* Increase the scale on hover or click */
+}
+
+.table-card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.table-card-title {
+  margin-right: 1em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.table-card-status {
+  color: #ffffff;
+  padding: 0.2em 0.2em;
+  border-radius: 6px;
+  box-shadow: 0px 0px 4px rgb(0 0 0);
+}
+
+
+/* Tables.css */
+.tables-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1em;
+  margin: 1em;
+}
+.tables-scroll-container {
+  overflow: auto; /* Enable scrolling */
+  max-height: 100vh; /* Limit the container to the full viewport height */
+}
+
+.free {
+  background-color: #2ea461; /* Set your desired color for free tables */
+}
+
+/* Styles for Occupied Table */
+.occupied {
+  background-color: #a42e2e; /* Set your desired color for occupied tables */
+}
+
+.reserved {
+  background-color: #d8d81e; /* Set your desired color for occupied tables */
+}
+
+/* Modal.css *//* Add this to your CSS file */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #656565f3;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.invoice-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-details {
+  margin-bottom: 20px;
+}
+
+.invoice-details .item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.invoice-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
