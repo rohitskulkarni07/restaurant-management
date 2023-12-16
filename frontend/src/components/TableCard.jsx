@@ -1,39 +1,22 @@
-// tableCard.jsx
-import React, { useState } from "react";
+// TableCard.jsx
+import React from "react";
 import PropTypes from "prop-types";
 
 const TableCard = ({ tableNumber, tableStatus, onClick }) => {
-  const [status, setStatus] = useState(tableStatus);
-
-  const toggleStatus = () => {
-    const newStatus =
-      status === "free"
-        ? "reserved"
-        : status === "reserved"
-        ? "occupied"
-        : "free";
-    setStatus(newStatus);
-  };
-
   const cardClassName = `table-card-container ${
-    status === "free" ? "free" : status === "reserved" ? "reserved" : "occupied"
+    tableStatus === "free"
+      ? "free"
+      : tableStatus === "reserved"
+      ? "reserved"
+      : "occupied"
   }`;
 
   return (
     <div className={cardClassName} onClick={onClick}>
       <div className="table-card-header">
         <span className="table-card-title">Table: {tableNumber}</span>
-        <span className="table-card-status">{status}</span>
+        <span className="table-card-status">{tableStatus}</span>
       </div>
-      <button
-        className="toggle-btn"
-        onClick={(e) => {
-          e.stopPropagation();
-          toggleStatus();
-        }}
-      >
-        Toggle Status
-      </button>
     </div>
   );
 };

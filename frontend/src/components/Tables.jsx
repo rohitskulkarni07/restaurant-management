@@ -1,15 +1,23 @@
-// Tables.jsx
-import React, { useState } from "react";
+// components/Tables.jsx
+
+import React, { useState, useEffect } from "react";
 import TableCard from "./TableCard";
 import Modal from "./Modal";
 
 const Tables = () => {
   const tableCount = 25;
-  const tablesArray = Array.from({ length: tableCount }, (_, index) => ({
+  const initialTablesArray = Array.from({ length: tableCount }, (_, index) => ({
     tableNumber: index + 1,
-    tableStatus: "free", // Set the default status to "free"
+    tableStatus: "free",
   }));
 
+  // Function to get the initial state from local storage or use the default state
+  const getInitialTablesState = () => {
+    const savedState = JSON.parse(localStorage.getItem("tablesState"));
+    return savedState || initialTablesArray;
+  };
+
+  const [tablesArray, setTablesArray] = useState(getInitialTablesState);
   const [selectedTable, setSelectedTable] = useState(null);
 
   const openModal = (tableNumber, tableStatus) => {
@@ -18,6 +26,23 @@ const Tables = () => {
 
   const closeModal = () => {
     setSelectedTable(null);
+  };
+
+  const toggleStatus = (status) => {
+    if (selectedTable) {
+      const newStatus = status;
+      const updatedTablesArray = tablesArray.map((table) =>
+        table.tableNumber === selectedTable.tableNumber
+          ? { ...table, tableStatus: newStatus }
+          : table
+      );
+
+      setTablesArray(updatedTablesArray);
+      setSelectedTable((prev) => ({ ...prev, tableStatus: newStatus }));
+
+      // Save the updated state to local storage
+      localStorage.setItem("tablesState", JSON.stringify(updatedTablesArray));
+    }
   };
 
   return (
@@ -32,12 +57,15 @@ const Tables = () => {
           />
         ))}
       </div>
-      <Modal
-        isOpen={selectedTable !== null}
-        onClose={closeModal}
-        tableNumber={selectedTable?.tableNumber}
-        tableStatus={selectedTable?.tableStatus}
-      />
+      {selectedTable && (
+        <Modal
+          isOpen={selectedTable !== null}
+          onClose={closeModal}
+          tableNumber={selectedTable?.tableNumber}
+          tableStatus={selectedTable?.tableStatus}
+          onToggleClick={toggleStatus}
+        />
+      )}
     </div>
   );
 };
